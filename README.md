@@ -68,7 +68,7 @@
     └── ...
 
 # The Weather API
-For this application we'll be using the MetaWeather API.
+For this application, we'll be using the MetaWeather API.
 
 We'll be focusing on two endpoints:
 
@@ -221,21 +221,21 @@ Note: Since `consolidated_weather` is an Array of Weather. We are creating a new
 
 
 ## What is NgRx
-NgRx provide us a store management that can help to handle your project state.
-It is a stream of actions where we can dispatch or subscribe the action in our whole app.
+NgRx provides us a state management that can help us.
+It is a stream of actions where we can dispatch or subscribe to the action in our whole app.
 
 
 ## Registering our NgRx Actions
 For each kind of event that we have in our app. We will need to register an Action in the NgRx.
 
-For example: In our app, there is a moment that we will need to fetch All Locations from the backend. Consequently it is necessary to tell the NgRx what is this Action.
+For example: In our app, there is a moment that we will need to fetch All Locations from the backend. Consequently, it is necessary to tell the NgRx what is this Action.
 
 However, we have two Actions in this fetch method.
 
 Action 1 - When you send a request to the backend - Start fetching.
-Action 2 - When the backend return the data - End fetching.
+Action 2 - When the backend returns the data - End fetching.
 
-In that case we are going to register the Actions as above:
+In that case, we are going to register the Actions as above:
 
 ```typescript
 export const getLocationsStart = createAction(
@@ -265,8 +265,8 @@ To register a reducer, it is necessary to set a State interface, Initial State a
 
 ##### The State Interface
 
-For the state interface it is necessary to tell the Reducer the format of your state.
-In our case we have the following interface.
+For the state interface, it is necessary to tell the Reducer the format of your state.
+In our case, we have the following interface.
 
 ```typescript
 export interface State {
@@ -340,9 +340,9 @@ export const locationReducer = createReducer(
 )
 ```
 
-NgRx will run a switch function and it will detect what Action you have dispetched.
+NgRx will run a switch function and it will detect what Action you have dispatched.
 
-If you call the dispatch method as `getLocationsStart`, Ngrx is going to cal the new state from the bellow function:
+If you call the dispatch method as `getLocationsStart`, Ngrx is going to call the new state from the bellow function:
 
 ```typescript
 on(LocationActions.getLocationsStart, (state) => {
@@ -359,7 +359,7 @@ on(LocationActions.getLocationsStart, (state) => {
 ## Effects
 > Effects allow us to handle asynchronous operations in NgRx.
 
-In our case we will need to use the Effect too. We are going to be fethcing data from our API. Consequnetly we will need to handle with async tasks.
+In our case, we will need to use the Effect too. We are going to be fetching data from our API. Consequnetly, we will need to handle async tasks.
 
 To create an effect we need to use the function 'createEffect()'. Giving in that way on what type of Action we should listen in this Effect.
 In the bellow example we are listening the `getLocationsStart`. Hence, everytime that we dispatch a Action for `getLocationsStart`, this Effect will be called.
@@ -379,12 +379,12 @@ getLocations$ = createEffect((): any => this.actions$.pipe(
 ```
 
 When this async task is resolved. We will need to tell the Effect what Action NgRx needs to handle.
-In this example the Effect will call the Actions`getLocationsEnd` for success and `locationErrors` if there is any error.
+In this example, the Effect will call the Actions`getLocationsEnd` for success and `locationErrors` if there is an error.
 
 
 
 ## Searching for a City - Toolbar
-On ngOnInit we are registering an Observale to keep tracking any changes in the Location State.
+On ngOnInit we are registering an Observable to keep tracking any changes in the Location State.
 
 ```typescript
 this._subscriptions.add(this.store.select('locationReducer')
@@ -400,9 +400,9 @@ this._subscriptions.add(this.store.select('locationReducer')
 
 And when any change is made. This listener will be called.
 
-In our Toolbar component we have a search field to find the available cities that we want to check the weather.
+In our Toolbar component, we have a search field to find the available cities that we want to check the weather.
 As soon you type a word, we are going to call the function getLocations().
-This function getLocations() is going to call the action `getLocationsStart` and as a payload we are passing the querystring.
+This function getLocations() is going to call the action `getLocationsStart` and as a payload, we are passing the querystring.
 
 ```typescript
 this.store.dispatch({
@@ -426,8 +426,8 @@ on(LocationActions.getLocationsStart, (state) => {
     }),
 ```
 
-Since we have an Effect listening the Action `getLocationsStart`. This effect will be called.
-And if Get success, a new Action will be dispatch with name `getLocationsEnd`. Otherwise, `locationsError`.
+Since we have an Effect listening to the Action `getLocationsStart`. This effect will be called.
+And if the response is equal a success, a new Action will be dispatch with name `getLocationsEnd`. Otherwise, `locationsError`.
 
 ```typescript
     getLocations$ = createEffect((): any => this.actions$.pipe(
@@ -443,7 +443,7 @@ And if Get success, a new Action will be dispatch with name `getLocationsEnd`. O
     );
 ```
 
-The Reducer `getLocationsEnd` will be triggered and consequently a new state will be set, with the searched cities.
+The Reducer `getLocationsEnd` will be triggered and consequently, a new state will be set, with the searched cities.
 
 ```typescript
     on(LocationActions.getLocationsEnd, (state, action) => {
