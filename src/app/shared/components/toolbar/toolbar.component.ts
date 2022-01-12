@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Store } from "@ngrx/store";
-import { Subscription } from "rxjs";
+import { debounceTime, fromEvent, map, Subscription } from "rxjs";
 
 import { LocationFilter } from "../../filters/location.filter";
 import { LocationModel } from "../../models/location.model";
@@ -13,7 +13,7 @@ import * as fromApp from '../../../shared/store/reducers/app.reducer';
     styleUrls: ['./toolbar.component.scss']
 })
 export class ToolbarComponent implements OnInit, OnDestroy {
-    @ViewChild('search') search: ElementRef;
+    @ViewChild('search', { static: true }) search: ElementRef;
 
     public locations: LocationModel[] = [];
     public isLoading: boolean = false;
@@ -27,6 +27,14 @@ export class ToolbarComponent implements OnInit, OnDestroy {
 
     public ngOnInit(): void {
         this.initializeStore();
+        this._subscriptions.add(fromEvent(this.search.nativeElement, 'keyup').pipe(
+            debounceTime(500)
+        ).subscribe(() => {
+            this.store.dispatch({
+                type: LocationActions.getLocationsStart.type,
+                payload: { querystring: this.filter.toQueryString() }
+            });
+        }));
     }
 
     public ngOnDestroy(): void {
@@ -43,13 +51,6 @@ export class ToolbarComponent implements OnInit, OnDestroy {
                 }
             })
         );
-    }
-
-    public getLocations(): void {
-        this.store.dispatch({
-            type: LocationActions.getLocationsStart.type,
-            payload: { querystring: this.filter.toQueryString() }
-        });
     }
 
     public onLocationSelect(location: LocationModel): void {

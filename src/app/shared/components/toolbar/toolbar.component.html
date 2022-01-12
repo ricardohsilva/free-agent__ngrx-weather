@@ -3,7 +3,7 @@
         <img class="toolbar__logo" src="../../../../assets/images/rangle-logo.png" alt="rangle-logo" />
 
         <div class="toolbar__wrapper">
-            <input class="toolbar__wrapper-input" #search (input)="getLocations()" [(ngModel)]="filter.query"
+            <input class="toolbar__wrapper-input" #search [(ngModel)]="filter.query"
                 type="text" placeholder="Search for a City" [matAutocomplete]="auto">
             <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
                 <mat-option (click)="onLocationSelect(location)" *ngFor="let location of locations"
