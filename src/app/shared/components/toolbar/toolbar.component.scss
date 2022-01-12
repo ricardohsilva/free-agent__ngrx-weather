@@ -1,0 +1,33 @@
+.toolbar {
+    position: fixed;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #2299ee;
+    color: #FFFFFF;
+    background-color: #11181d;
+    z-index: 100;
+}
+
+.toolbar__logo{
+    height: auto;
+    width: 50px;
+}
+
+.toolbar__wrapper {
+    position: relative;
+}
+
+.toolbar__wrapper-input {
+    height: 1.5rem;
+    width: 20rem;
+    max-width: 30vw;
+    padding: 0.5rem;
+    font-size: 16px;
+    border-radius: 5px;
+}
+
+.toolbar__wrapper-spinner {
+    position: absolute;
+    right: 5%;
+    top: 25%;
+}

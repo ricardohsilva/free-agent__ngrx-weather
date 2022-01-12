@@ -1,0 +1,18 @@
+<mat-toolbar class="toolbar">
+    <mat-toolbar-row fxLayout="row" fxLayoutAlign="space-between center">
+        <img class="toolbar__logo" src="../../../../assets/images/rangle-logo.png" alt="rangle-logo" />
+
+        <div class="toolbar__wrapper">
+            <input class="toolbar__wrapper-input" #search (input)="getLocations()" [(ngModel)]="filter.query"
+                type="text" placeholder="Search for a City" [matAutocomplete]="auto">
+            <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn.bind(this)">
+                <mat-option (click)="onLocationSelect(location)" *ngFor="let location of locations"
+                    [value]="location.woeid">
+                    {{location.title}}
+                </mat-option>
+            </mat-autocomplete>
+            <mat-spinner *ngIf="isLoading" class="toolbar__wrapper-spinner" diameter="20"></mat-spinner>
+        </div>
+
+    </mat-toolbar-row>
+</mat-toolbar>

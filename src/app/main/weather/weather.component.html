@@ -1,0 +1,33 @@
+<div fxLayout="column" fxLayoutAlign="center center" class="weather__container">
+    <mat-spinner *ngIf="isLoading"></mat-spinner>
+
+    <mat-card *ngIf="!selectedLocation && !isLoading">Search for a City in the Input Box to check the Weather</mat-card>
+
+    <mat-card *ngIf="selectedLocation" class="weather__card">
+        <mat-card-header>
+            <mat-card-title>{{selectedLocation.title}}</mat-card-title>
+            <mat-card-subtitle>{{selectedLocation.location_type}}</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content class="weather__card-grid">
+            <mat-card class="weather__card-grid-item" *ngFor="let weather of selectedLocation.consolidated_weather">
+
+                <mat-card-header>
+                    <div mat-card-avatar [ngStyle]="{'background-image': 'url(' + weather.weather_image + ')'}" class="weather__card-grid-avatar"></div>
+                    <mat-card-title>{{weather.weather_state_name}}</mat-card-title>
+                    <mat-card-subtitle>{{weather.applicable_date}}</mat-card-subtitle>
+                </mat-card-header>
+
+                <mat-card-content>
+                    <mat-list>
+                        <mat-list-item>Wind Direction: {{weather.wind_direction_compass}}</mat-list-item>
+                        <mat-list-item>Humidity: {{weather.humidity}}%</mat-list-item>
+                        <mat-list-item>Max: {{weather.max_temp  | number: '1.0-0'}}°</mat-list-item>
+                        <mat-list-item>Min: {{weather.min_temp  | number: '1.0-0'}}°</mat-list-item>
+                      </mat-list> 
+                </mat-card-content>
+
+
+            </mat-card>
+        </mat-card-content>
+    </mat-card>
+</div>

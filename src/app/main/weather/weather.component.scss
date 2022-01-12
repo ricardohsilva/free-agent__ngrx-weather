@@ -1,0 +1,23 @@
+.weather__container {
+    min-height: 100vh;
+    padding-top: 100px;
+}
+
+.weather__card {
+    max-width: 800px;
+    width: 80vw;
+}
+
+.weather__card-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(225px, 1fr));
+    gap: 36px;
+}
+
+.weather__card-grid-avatar{
+    background-size: cover;
+}
+
+.weather__card-grid-item{
+    min-height: 250px;
+}
